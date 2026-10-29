@@ -20,3 +20,4 @@ A mobile-friendly, liquid-glass style web app (Google Apps Script) for Momentum 
 - Edit the teacher list in both `Code.gs` (`TEACHERS`, `DEFAULTS`) and `Index.html` (`BOARD` and the teacher dropdown).
 - Anyone with the link can change the counts.
 - Google Forms does not confirm back to the page, so check Responses after the first test entry.
+## DEVELOPED BY RAHUL NISHAD
