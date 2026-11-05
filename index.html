@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<base target="_top">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Momentum Lecture Entry</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="card">
+  
+  <div class="brand">
+  <img class="coaching-logo" src="coaching-logo.svg" alt="Coaching logo">
+  <!-- <span class="badge">Momentum</span> -->
+</div>
+  <h1>Lecture entry</h1>
+  <p class="sub">One entry per video lecture. Fill the details and tap Continue to submit.</p>
+
+  <form id="f" autocomplete="off">
+    <label for="teacher">Teacher</label>
+    <select id="teacher" required>
+      <option value="" disabled selected>Choose</option>
+      <option>Subodh Sir</option><option>Pankaj Sir</option><option>Aditya Sir</option>
+      <option>Durgesh Sir</option><option>Nitish Sir</option><option>Ashwani Sir</option>
+      <option>CP Sir</option><option>Sudhanshu Sir</option><option>Vikas Sir</option>
+      <option>Shivam sir</option><option>Om Sir</option><option>Sandeep Sir</option>
+      <option>Alok Sir</option><option>Aditi ma'm</option><option>Nikita ma'm</option>
+    </select>
+
+    <label for="subject">Subject</label>
+    <select id="subject" required>
+      <option value="" disabled selected>Choose</option>
+      <option>Physics</option><option>Chemistry</option><option>Mathematics</option><option>Zoology</option>
+    </select>
+    <label for="batchName">Batch Name</label>
+    <input id="batchName" type="text" placeholder="e.g. F1, F2, F3" required>
+
+    <label for="lecture">Lecture name</label>
+    <input id="lecture" type="text" placeholder="e.g. Lecture 12" required>
+
+    <label for="topic">Topic name</label>
+    <input id="topic" type="text" placeholder="e.g. Laws of Motion">
+
+    <label for="date">Lecture date</label>
+    <input id="date" type="date" required>
+
+    <div class="err" id="err"></div>
+    <button type="submit">Continue</button>
+    
+  </form>
+  <div class="thanks" id="thanks">
+    <div class="check"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+    <h2>Thank you!</h2>
+    <p>Your lecture entry has been submitted.</p>
+    <button type="button" class="ghost" id="again">Add another lecture</button>
+  </div>
+</main>
+
+<section class="card" id="boardCard">
+  <div class="board-head">
+    <div class="app-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg></div>
+    <div><h2>Videos to Arrange</h2><p>Remaining videos for each teacher</p></div>
+  </div>
+  <div id="board"></div>
+  <div class="hint" id="status"></div>
+</section>
+
+<script src="script.js" defer></script>
+</body>
+</html>
