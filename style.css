@@ -88,3 +88,95 @@
   @media(max-width:360px){.nm{font-size:14.5px}.av{width:36px;height:36px;font-size:12px}.num{min-width:44px}}
   .brand { display: flex; align-items: center; gap: 2px; }
 .coaching-logo { width: 1250px; height: 62px; object-fit: contain;align-self:center;}
+
+
+/* Cached suggestions with the reference's spring reveal and staggered options */
+.autocomplete{position:relative;z-index:2}
+.autocomplete:focus-within{z-index:5}
+.suggestions{position:absolute;top:calc(100% + 8px);left:0;right:0;max-height:220px;overflow:auto;padding:6px;border:1px solid rgba(255,255,255,.9);border-radius:16px;background:rgba(255,255,255,.96);backdrop-filter:blur(18px);box-shadow:0 12px 32px rgba(30,70,50,.16),0 2px 8px rgba(0,0,0,.05);transform:scaleY(0);transform-origin:top center;opacity:0;visibility:hidden;pointer-events:none;transition:transform .38s cubic-bezier(.34,1.56,.64,1),opacity .2s ease,visibility .2s}
+.suggestions.open{transform:scaleY(1);opacity:1;visibility:visible;pointer-events:auto}
+.suggestion-option{display:flex;align-items:center;width:100%;min-height:42px;padding:10px 12px;border:0;border-radius:10px;background:transparent;color:var(--ink);font:inherit;font-size:14px;text-align:left;cursor:pointer;opacity:0;transform:translateY(4px);transition:opacity .28s ease,transform .28s ease,background .12s,color .12s}
+.suggestions.open .suggestion-option{opacity:1;transform:translateY(0)}
+.suggestions.open .suggestion-option:nth-child(1){transition-delay:.04s}
+.suggestions.open .suggestion-option:nth-child(2){transition-delay:.09s}
+.suggestions.open .suggestion-option:nth-child(3){transition-delay:.14s}
+.suggestions.open .suggestion-option:nth-child(4){transition-delay:.19s}
+.suggestion-option:hover,.suggestion-option.is-highlighted{background:rgba(31,157,85,.11);color:var(--accent2)}
+.suggestion-option.is-highlighted{outline:2px solid var(--accent);outline-offset:-2px}
+select{cursor:pointer}
+@media(prefers-reduced-motion:reduce){.suggestions,.suggestion-option{transition:none}}
+/* Animated teacher and subject dropdowns */
+.custom-select{position:relative;z-index:4;margin:0 0 2px}
+.native-select-hidden{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important;opacity:0!important;pointer-events:none!important}
+.custom-select-button{display:flex;align-items:center;justify-content:space-between;width:100%;margin:0;padding:14px 16px;border:1px solid rgba(255,255,255,.9);border-radius:16px;background:rgba(255,255,255,.68);color:var(--muted);font:inherit;font-size:16px;text-align:left;cursor:pointer;box-shadow:inset 0 1px 2px rgba(0,0,0,.04);transition:border-color .18s,box-shadow .18s,background .18s}
+.custom-select-button:hover,.custom-select-button[aria-expanded="true"]{border-color:var(--accent);background:rgba(255,255,255,.9);box-shadow:0 0 0 4px rgba(31,157,85,.14)}
+.custom-select-button.has-value{color:var(--ink)}
+.custom-select-chevron{display:inline-block;color:var(--muted);transition:transform .28s cubic-bezier(.34,1.56,.64,1)}
+.custom-select-button[aria-expanded="true"] .custom-select-chevron{transform:rotate(180deg)}
+.custom-select-menu{position:absolute;top:calc(100% + 8px);left:0;right:0;z-index:10;max-height:240px;overflow:auto;padding:6px;border:1px solid rgba(255,255,255,.9);border-radius:16px;background:rgba(255,255,255,.97);backdrop-filter:blur(18px);box-shadow:0 12px 32px rgba(30,70,50,.16);transform:scaleY(0);transform-origin:top center;opacity:0;visibility:hidden;pointer-events:none;transition:transform .38s cubic-bezier(.34,1.56,.64,1),opacity .2s ease,visibility .2s}
+.custom-select-menu.is-open{transform:scaleY(1);opacity:1;visibility:visible;pointer-events:auto}
+.custom-select-option{display:block;width:100%;min-height:40px;margin:0;padding:10px 12px;border:0;border-radius:10px;background:transparent;color:var(--ink);font:inherit;font-size:14px;text-align:left;cursor:pointer;opacity:0;transform:translateY(4px);transition:opacity .25s ease,transform .25s ease,background .12s}
+.custom-select-menu.is-open .custom-select-option{opacity:1;transform:translateY(0)}
+.custom-select-menu.is-open .custom-select-option:nth-child(1){transition-delay:.04s}.custom-select-menu.is-open .custom-select-option:nth-child(2){transition-delay:.08s}.custom-select-menu.is-open .custom-select-option:nth-child(3){transition-delay:.12s}.custom-select-menu.is-open .custom-select-option:nth-child(4){transition-delay:.16s}
+.custom-select-option:hover,.custom-select-option:focus-visible,.custom-select-option.is-selected{outline:0;background:rgba(31,157,85,.11);color:var(--accent2)}
+.custom-select-option.is-selected::after{content:"✓";float:right;color:var(--accent);font-weight:700}
+@media(prefers-reduced-motion:reduce){.custom-select-menu,.custom-select-option,.custom-select-chevron{transition:none}}
+
+/* Day/night mode toggle and page theme */
+.theme-toggle-wrap{display:flex;align-items:center;justify-content:flex-end;gap:10px;margin:-8px 0 2px}
+.theme-label{font-size:12px;font-weight:650;color:var(--muted);transition:color .3s}
+.theme-switch{position:relative;width:58px;height:34px;margin:0;padding:3px;border:1px solid rgba(31,157,85,.22);border-radius:99px;background:rgba(31,157,85,.12);box-shadow:inset 0 1px 3px rgba(0,0,0,.08);cursor:pointer;transition:background .35s,border-color .35s,box-shadow .3s}
+.theme-switch:focus-visible{outline:3px solid rgba(31,157,85,.4);outline-offset:3px}
+.theme-knob{position:absolute;left:3px;top:3px;width:26px;height:26px;display:grid;place-items:center;border-radius:50%;background:#fff;box-shadow:0 2px 7px rgba(0,0,0,.18);transition:transform .4s cubic-bezier(.34,1.56,.64,1),background .3s}
+.theme-switch[aria-checked="true"]{background:linear-gradient(135deg,#14532d,#22a45a);border-color:transparent}
+.theme-switch[aria-checked="true"] .theme-knob{transform:translateX(24px);background:#10251a}
+.theme-icon{position:absolute;font-size:14px;line-height:1;transition:opacity .22s,transform .28s}
+.theme-icon-day{opacity:1;transform:scale(1)}.theme-icon-night{opacity:0;transform:scale(.45)}
+.theme-switch[aria-checked="true"] .theme-icon-day{opacity:0;transform:scale(.45)}.theme-switch[aria-checked="true"] .theme-icon-night{opacity:1;transform:scale(1)}
+body,.card,body input,body select,body .custom-select-button,body .custom-select-menu,body .suggestions,body .trow{transition:background-color .35s,color .3s,border-color .3s,box-shadow .3s}
+body.theme-dark{color:#e1efe6;background:radial-gradient(60% 50% at 15% 10%,#173927 0%,transparent 60%),radial-gradient(55% 50% at 90% 20%,#182f40 0%,transparent 60%),radial-gradient(60% 55% at 70% 95%,#39291f 0%,transparent 60%),#0b1510;background-attachment:fixed;--ink:#e1efe6;--muted:#a6b8ac;--accent:#43c779;--accent2:#69dc95;--glass:rgba(20,35,27,.84);--edge:rgba(183,218,194,.14)}
+body.theme-dark .card{background:linear-gradient(145deg,rgba(26,43,33,.94),rgba(17,30,23,.9));border-color:rgba(185,220,195,.13);box-shadow:0 20px 50px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.05)}
+body.theme-dark input,body.theme-dark select,body.theme-dark .custom-select-button{color:var(--ink);background-color:rgba(12,25,17,.78);border-color:rgba(188,220,198,.18)}
+body.theme-dark input::placeholder{color:#83998a}
+body.theme-dark .custom-select-menu,body.theme-dark .suggestions{background:rgba(18,32,23,.98);border-color:rgba(188,220,198,.16);box-shadow:0 14px 36px rgba(0,0,0,.4)}
+body.theme-dark .custom-select-option,body.theme-dark .suggestion-option{color:var(--ink)}
+body.theme-dark .custom-select-option:hover,body.theme-dark .custom-select-option:focus-visible,body.theme-dark .custom-select-option.is-selected,body.theme-dark .suggestion-option:hover,body.theme-dark .suggestion-option.is-highlighted{background:rgba(67,199,121,.16);color:#8be5aa}
+body.theme-dark .trow{background:linear-gradient(120deg,rgba(19,34,25,.92),rgba(30,53,39,.9));border-color:rgba(190,220,198,.12);box-shadow:0 6px 16px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.03)}
+body.theme-dark .num{border-color:rgba(190,220,198,.12)}
+body.theme-dark .hint,body.theme-dark .board-head p{color:#a6b8ac}
+body.theme-dark .ghost{background:rgba(25,43,32,.9);color:#85dfa4;border-color:rgba(190,220,198,.17)}
+@media(prefers-reduced-motion:reduce){.theme-switch,.theme-knob,.theme-icon,body,body *{transition:none!important;animation:none!important}}
+
+/* Bottom navigation inspired by the sliding selector reference */
+body{padding-bottom:112px}
+.page-view{animation:page-enter .32s cubic-bezier(.2,.75,.25,1) both}
+.page-view[hidden]{display:none!important}
+.page-view.is-active{display:block}
+@keyframes page-enter{from{opacity:0;transform:translateY(12px) scale(.99)}to{opacity:1;transform:translateY(0) scale(1)}}
+.bottom-nav{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:50;width:min(460px,calc(100% - 28px));min-height:66px;padding:7px;display:grid;grid-template-columns:1fr 1fr;align-items:center;border:1px solid rgba(255,255,255,.75);border-radius:24px;background:rgba(20,34,27,.94);box-shadow:0 12px 34px rgba(20,50,34,.28),inset 0 1px 0 rgba(255,255,255,.12);backdrop-filter:blur(18px);isolation:isolate}
+.bottom-nav input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.bottom-nav label{position:relative;z-index:2;margin:0;min-width:0;height:52px;padding:5px 8px;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:8px;border-radius:17px;color:#b8c9bd;font-size:12px;font-weight:650;letter-spacing:0;text-transform:none;text-align:center;cursor:pointer;transition:color .3s,transform .3s cubic-bezier(.34,1.56,.64,1)}
+.bottom-nav label:hover{color:#fff;text-shadow:none}
+.bottom-nav input:focus-visible+label{outline:2px solid #75e3a2;outline-offset:2px}
+.bottom-nav input:checked+label{color:#10331f;transform:translateY(-1px)}
+.nav-icon{font-size:19px;line-height:1}
+.nav-selector{position:absolute;z-index:1;top:7px;bottom:7px;left:7px;width:calc(50% - 7px);border-radius:18px;background:linear-gradient(135deg,#c8f4d7,#72d99a);box-shadow:0 4px 16px rgba(71,210,124,.25);transition:transform .45s cubic-bezier(.68,-.55,.27,1.55)}
+#nav-videos:checked~.nav-selector{transform:translateX(100%)}
+body.theme-dark .bottom-nav{background:rgba(7,17,11,.96);border-color:rgba(188,220,198,.15);box-shadow:0 12px 34px rgba(0,0,0,.48),inset 0 1px 0 rgba(255,255,255,.06)}
+body.theme-dark .bottom-nav label{color:#a6b8ac}
+body.theme-dark .bottom-nav input:checked+label{color:#0b2917}
+body.theme-dark .nav-selector{background:linear-gradient(135deg,#8ce6aa,#42be73)}
+@media(max-width:360px){.bottom-nav{min-height:62px}.bottom-nav label{font-size:11px;gap:6px}.nav-icon{font-size:17px}}
+@media(prefers-reduced-motion:reduce){.page-view{animation:none}.nav-selector,.bottom-nav label{transition:none}}
+
+/* Compact navigation keeps the form's Continue action visually primary */
+.bottom-nav{width:min(340px,calc(100% - 48px));min-height:54px;padding:5px;border-radius:19px;background:rgba(24,38,30,.92);box-shadow:0 6px 18px rgba(20,50,34,.2);bottom:calc(10px + env(safe-area-inset-bottom))}
+.bottom-nav label{height:42px;padding:4px 6px;font-size:10.5px;gap:6px}
+.nav-icon{font-size:16px}
+.nav-selector{top:5px;bottom:5px;left:5px;width:calc(50% - 5px);border-radius:14px;box-shadow:0 2px 8px rgba(71,210,124,.18)}
+button[type="submit"]{position:relative;z-index:1;box-shadow:0 10px 24px rgba(31,157,85,.38),inset 0 1px 0 rgba(255,255,255,.5)}
+@media(max-width:360px){.bottom-nav{width:calc(100% - 56px);min-height:50px}.bottom-nav label{height:40px;font-size:10px}.nav-icon{font-size:15px}}
+
+/* Keep the active custom select menu above the fields that follow it */
+.custom-select:focus-within{z-index:30}
+.custom-select-menu.is-open{z-index:40}

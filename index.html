@@ -8,18 +8,23 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<main class="card">
+<main class="card page-view is-active" id="lecturePage">
   
   <div class="brand">
   <img class="coaching-logo" src="coaching-logo.svg" alt="Coaching logo">
   <!-- <span class="badge">Momentum</span> -->
 </div>
-  <h1>Lecture entry</h1>
+  <div class="theme-toggle-wrap">
+    <span class="theme-label" id="themeLabel">Day mode</span>
+    <button class="theme-switch" id="themeSwitch" type="button" role="switch" aria-checked="false" aria-label="Dark mode">
+      <span class="theme-knob"><span class="theme-icon theme-icon-day" aria-hidden="true">☀️</span><span class="theme-icon theme-icon-night" aria-hidden="true">🌙</span></span>
+    </button>
+  </div>  <h1>Lecture entry</h1>
   <p class="sub">One entry per video lecture. Fill the details and tap Continue to submit.</p>
 
   <form id="f" autocomplete="off">
     <label for="teacher">Teacher</label>
-    <select id="teacher" required>
+    <select id="teacher" required aria-label="Teacher">
       <option value="" disabled selected>Choose</option>
       <option>Subodh Sir</option><option>Pankaj Sir</option><option>Aditya Sir</option>
       <option>Durgesh Sir</option><option>Nitish Sir</option><option>Ashwani Sir</option>
@@ -29,19 +34,18 @@
     </select>
 
     <label for="subject">Subject</label>
-    <select id="subject" required>
+    <select id="subject" required aria-label="Subject">
       <option value="" disabled selected>Choose</option>
       <option>Physics</option><option>Chemistry</option><option>Mathematics</option><option>Zoology</option>
     </select>
     <label for="batchName">Batch Name</label>
-    <input id="batchName" type="text" placeholder="e.g. F1, F2, F3" required>
+    <div class="autocomplete"><input id="batchName" type="text" placeholder="e.g. F1, F2, F3" autocomplete="off" required><div class="suggestions" id="batchSuggestions" role="listbox"></div></div>
 
     <label for="lecture">Lecture name</label>
-    <input id="lecture" type="text" placeholder="e.g. Lecture 12" required>
+    <div class="autocomplete"><input id="lecture" type="text" placeholder="e.g. Lecture 12" autocomplete="off" required><div class="suggestions" id="lectureSuggestions" role="listbox"></div></div>
 
     <label for="topic">Topic name</label>
-    <input id="topic" type="text" placeholder="e.g. Laws of Motion">
-
+    <div class="autocomplete"><input id="topic" type="text" placeholder="e.g. Laws of Motion" autocomplete="off"><div class="suggestions" id="topicSuggestions" role="listbox"></div></div>
     <label for="date">Lecture date</label>
     <input id="date" type="date" required>
 
@@ -57,7 +61,7 @@
   </div>
 </main>
 
-<section class="card" id="boardCard">
+<section class="card page-view" id="boardCard" hidden>
   <div class="board-head">
     <div class="app-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg></div>
     <div><h2>Videos to Arrange</h2><p>Remaining videos for each teacher</p></div>
@@ -66,6 +70,12 @@
   <div class="hint" id="status"></div>
 </section>
 
-<script src="script.js" defer></script>
+<nav class="bottom-nav" aria-label="Main navigation">
+  <input type="radio" name="page-nav" id="nav-lecture" checked>
+  <label for="nav-lecture"><span class="nav-icon" aria-hidden="true">✎</span><span>Lecture Entry</span></label>
+  <input type="radio" name="page-nav" id="nav-videos">
+  <label for="nav-videos"><span class="nav-icon" aria-hidden="true">▤</span><span>Videos to Arrange</span></label>
+  <span class="nav-selector" aria-hidden="true"></span>
+</nav><script src="script.js" defer></script>
 </body>
 </html>
