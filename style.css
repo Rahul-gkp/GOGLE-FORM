@@ -105,7 +105,7 @@
 .suggestion-option.is-highlighted{outline:2px solid var(--accent);outline-offset:-2px}
 select{cursor:pointer}
 @media(prefers-reduced-motion:reduce){.suggestions,.suggestion-option{transition:none}}
-/* Animated teacher and subject dropdowns */
+/* Animated teacher dropdown */
 .custom-select{position:relative;z-index:4;margin:0 0 2px}
 .native-select-hidden{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important;opacity:0!important;pointer-events:none!important}
 .custom-select-button{display:flex;align-items:center;justify-content:space-between;width:100%;margin:0;padding:14px 16px;border:1px solid rgba(255,255,255,.9);border-radius:16px;background:rgba(255,255,255,.68);color:var(--muted);font:inherit;font-size:16px;text-align:left;cursor:pointer;box-shadow:inset 0 1px 2px rgba(0,0,0,.04);transition:border-color .18s,box-shadow .18s,background .18s}
@@ -147,35 +147,28 @@ body.theme-dark .hint,body.theme-dark .board-head p{color:#a6b8ac}
 body.theme-dark .ghost{background:rgba(25,43,32,.9);color:#85dfa4;border-color:rgba(190,220,198,.17)}
 @media(prefers-reduced-motion:reduce){.theme-switch,.theme-knob,.theme-icon,body,body *{transition:none!important;animation:none!important}}
 
-/* Bottom navigation inspired by the sliding selector reference */
-body{padding-bottom:112px}
+/* Bottom navigation — enlarged and elevated to stay clear of Netlify overlay */
+body{padding-bottom:136px}
 .page-view{animation:page-enter .32s cubic-bezier(.2,.75,.25,1) both}
 .page-view[hidden]{display:none!important}
 .page-view.is-active{display:block}
 @keyframes page-enter{from{opacity:0;transform:translateY(12px) scale(.99)}to{opacity:1;transform:translateY(0) scale(1)}}
-.bottom-nav{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:50;width:min(460px,calc(100% - 28px));min-height:66px;padding:7px;display:grid;grid-template-columns:1fr 1fr;align-items:center;border:1px solid rgba(255,255,255,.75);border-radius:24px;background:rgba(20,34,27,.94);box-shadow:0 12px 34px rgba(20,50,34,.28),inset 0 1px 0 rgba(255,255,255,.12);backdrop-filter:blur(18px);isolation:isolate}
+.bottom-nav{position:fixed;left:50%;bottom:calc(44px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:9999;width:min(440px,calc(100% - 24px));min-height:66px;padding:7px;display:grid;grid-template-columns:1fr 1fr;align-items:center;border:1px solid rgba(255,255,255,.75);border-radius:22px;background:rgba(20,34,27,.95);box-shadow:0 12px 34px rgba(20,50,34,.3),inset 0 1px 0 rgba(255,255,255,.12);backdrop-filter:blur(18px);isolation:isolate}
 .bottom-nav input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
-.bottom-nav label{position:relative;z-index:2;margin:0;min-width:0;height:52px;padding:5px 8px;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:8px;border-radius:17px;color:#b8c9bd;font-size:12px;font-weight:650;letter-spacing:0;text-transform:none;text-align:center;cursor:pointer;transition:color .3s,transform .3s cubic-bezier(.34,1.56,.64,1)}
+.bottom-nav label{position:relative;z-index:2;margin:0;min-width:0;height:52px;padding:6px 12px;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:9px;border-radius:16px;color:#b8c9bd;font-size:14.5px;font-weight:700;letter-spacing:0;text-transform:none;text-align:center;white-space:nowrap;cursor:pointer;transition:color .3s,transform .3s cubic-bezier(.34,1.56,.64,1)}
 .bottom-nav label:hover{color:#fff;text-shadow:none}
 .bottom-nav input:focus-visible+label{outline:2px solid #75e3a2;outline-offset:2px}
 .bottom-nav input:checked+label{color:#10331f;transform:translateY(-1px)}
 .nav-icon{font-size:19px;line-height:1}
-.nav-selector{position:absolute;z-index:1;top:7px;bottom:7px;left:7px;width:calc(50% - 7px);border-radius:18px;background:linear-gradient(135deg,#c8f4d7,#72d99a);box-shadow:0 4px 16px rgba(71,210,124,.25);transition:transform .45s cubic-bezier(.68,-.55,.27,1.55)}
+.nav-selector{position:absolute;z-index:1;top:7px;bottom:7px;left:7px;width:calc(50% - 7px);border-radius:16px;background:linear-gradient(135deg,#c8f4d7,#72d99a);box-shadow:0 4px 16px rgba(71,210,124,.28);transition:transform .45s cubic-bezier(.68,-.55,.27,1.55)}
 #nav-videos:checked~.nav-selector{transform:translateX(100%)}
 body.theme-dark .bottom-nav{background:rgba(7,17,11,.96);border-color:rgba(188,220,198,.15);box-shadow:0 12px 34px rgba(0,0,0,.48),inset 0 1px 0 rgba(255,255,255,.06)}
 body.theme-dark .bottom-nav label{color:#a6b8ac}
 body.theme-dark .bottom-nav input:checked+label{color:#0b2917}
 body.theme-dark .nav-selector{background:linear-gradient(135deg,#8ce6aa,#42be73)}
-@media(max-width:360px){.bottom-nav{min-height:62px}.bottom-nav label{font-size:11px;gap:6px}.nav-icon{font-size:17px}}
-@media(prefers-reduced-motion:reduce){.page-view{animation:none}.nav-selector,.bottom-nav label{transition:none}}
-
-/* Compact navigation keeps the form's Continue action visually primary */
-.bottom-nav{width:min(340px,calc(100% - 48px));min-height:54px;padding:5px;border-radius:19px;background:rgba(24,38,30,.92);box-shadow:0 6px 18px rgba(20,50,34,.2);bottom:calc(10px + env(safe-area-inset-bottom))}
-.bottom-nav label{height:42px;padding:4px 6px;font-size:10.5px;gap:6px}
-.nav-icon{font-size:16px}
-.nav-selector{top:5px;bottom:5px;left:5px;width:calc(50% - 5px);border-radius:14px;box-shadow:0 2px 8px rgba(71,210,124,.18)}
 button[type="submit"]{position:relative;z-index:1;box-shadow:0 10px 24px rgba(31,157,85,.38),inset 0 1px 0 rgba(255,255,255,.5)}
-@media(max-width:360px){.bottom-nav{width:calc(100% - 56px);min-height:50px}.bottom-nav label{height:40px;font-size:10px}.nav-icon{font-size:15px}}
+@media(max-width:380px){.bottom-nav{width:calc(100% - 20px);min-height:60px;bottom:calc(46px + env(safe-area-inset-bottom))}.bottom-nav label{height:46px;font-size:13px;gap:6px;padding:6px 8px}.nav-icon{font-size:17px}}
+@media(prefers-reduced-motion:reduce){.page-view{animation:none}.nav-selector,.bottom-nav label{transition:none}}
 
 /* Keep the active custom select menu above the fields that follow it */
 .custom-select:focus-within{z-index:30}
