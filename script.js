@@ -1,7 +1,6 @@
 var FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfzabq7Ah7sGN_v6ApSO7OKG5rUKJwgjtHIf_9dXdfYgJ0iFQ/formResponse";
   var FIELD = {
     teacher: "entry.553631712",
-    subject: "entry.1220593235",
     topic:   "entry.1738076249",
     batch:   "entry.601322218",
     lecture: "entry.2007937138",
@@ -60,15 +59,15 @@ var FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfzabq7Ah7sGN_v6ApSO7OK
     native.addEventListener("change",sync); sync();
     return {native:native,button:button,list:list};
   }
-  var teacherSelect=enhanceSelect("teacher","Teacher"), subjectSelect=enhanceSelect("subject","Subject");
-  document.addEventListener("click",function(e){[teacherSelect,subjectSelect].forEach(function(control){if(!control.button.parentNode.contains(e.target)){control.list.classList.remove("is-open");control.button.setAttribute("aria-expanded","false");}});});
+  var teacherSelect=enhanceSelect("teacher","Teacher");
+  document.addEventListener("click",function(e){if(!teacherSelect.button.parentNode.contains(e.target)){teacherSelect.list.classList.remove("is-open");teacherSelect.button.setAttribute("aria-expanded","false");}});
 
-  // Suggestions stay on this device and are scoped to teacher and subject.
+  // Suggestions stay on this device and are scoped to teacher.
   var ENTRY_CACHE_KEY = "momentumLectureEntries.v1";
   function readEntryCache(){ try { var data=JSON.parse(localStorage.getItem(ENTRY_CACHE_KEY)||"[]"); return Array.isArray(data)?data:[]; } catch(e){ return []; } }
   function refreshSuggestions(activeId){
-    var teacher=$("teacher").value, subject=$("subject").value;
-    var history=readEntryCache().filter(function(x){return x && x.teacher===teacher && x.subject===subject;});
+    var teacher=$("teacher").value;
+    var history=readEntryCache().filter(function(x){return x && x.teacher===teacher;});
     [["batchName","batch","batchSuggestions"],["lecture","lecture","lectureSuggestions"],["topic","topic","topicSuggestions"]].forEach(function(pair){
       var input=$(pair[0]), menu=$(pair[2]), values=[];
       history.forEach(function(item){if(item[pair[1]] && values.indexOf(item[pair[1]])<0) values.push(item[pair[1]]);});
@@ -80,24 +79,23 @@ var FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfzabq7Ah7sGN_v6ApSO7OK
     });
   }
   function rememberEntry(entry){
-    try { var history=readEntryCache().filter(function(x){return !(x.teacher===entry.teacher && x.subject===entry.subject && x.batch===entry.batch && x.lecture===entry.lecture && x.topic===entry.topic);}); history.unshift(entry); localStorage.setItem(ENTRY_CACHE_KEY,JSON.stringify(history.slice(0,60))); refreshSuggestions(); }
+    try { var history=readEntryCache().filter(function(x){return !(x.teacher===entry.teacher && x.batch===entry.batch && x.lecture===entry.lecture && x.topic===entry.topic);}); history.unshift(entry); localStorage.setItem(ENTRY_CACHE_KEY,JSON.stringify(history.slice(0,60))); refreshSuggestions(); }
     catch(e) { /* Suggestions are optional when browser storage is unavailable. */ }
   }
-  $("teacher").addEventListener("change",refreshSuggestions); $("subject").addEventListener("change",refreshSuggestions);
+  $("teacher").addEventListener("change",refreshSuggestions);
   ["batchName","lecture","topic"].forEach(function(id){$(id).addEventListener("focus",function(){refreshSuggestions(id);});$(id).addEventListener("input",function(){refreshSuggestions(id);});$(id).setAttribute("aria-autocomplete","list");$(id).setAttribute("aria-controls",id==="batchName"?"batchSuggestions":id==="lecture"?"lectureSuggestions":"topicSuggestions");$(id).addEventListener("keydown",function(e){var menu=$(id==="batchName"?"batchSuggestions":id==="lecture"?"lectureSuggestions":"topicSuggestions"), options=Array.prototype.slice.call(menu.querySelectorAll(".suggestion-option")), active=options.findIndex(function(o){return o.classList.contains("is-highlighted");});if(e.key==="Escape"){menu.classList.remove("open");$(id).setAttribute("aria-expanded","false");return;}if(e.key==="ArrowDown"||e.key==="ArrowUp"){e.preventDefault();if(!menu.classList.contains("open"))refreshSuggestions(id);options=Array.prototype.slice.call(menu.querySelectorAll(".suggestion-option"));if(!options.length)return;options.forEach(function(o){o.classList.remove("is-highlighted");});active=(active+(e.key==="ArrowDown"?1:-1)+options.length)%options.length;options[active].classList.add("is-highlighted");options[active].scrollIntoView({block:"nearest"});}else if(e.key==="Enter"&&menu.classList.contains("open")){var chosen=active>-1?options[active]:null;if(chosen){e.preventDefault();chosen.dispatchEvent(new MouseEvent("mousedown",{bubbles:true}));}}});}); refreshSuggestions();
   document.addEventListener("click",function(e){if(!e.target.closest(".autocomplete")) refreshSuggestions();});
   form.addEventListener("submit",function(e){
     e.preventDefault();
     if(btn.disabled) return;
     err.style.display="none";
-    if(!teacherSelect.native.value || !subjectSelect.native.value){err.textContent="Please choose a teacher and subject.";err.style.display="block";(!teacherSelect.native.value?teacherSelect.button:subjectSelect.button).focus();return;}
+    if(!teacherSelect.native.value){err.textContent="Please choose a teacher.";err.style.display="block";teacherSelect.button.focus();return;}
     var v=function(id){return $(id).value.trim();};
     var teacherName=v("teacher");
-    var entry={teacher:teacherName,subject:v("subject"),batch:v("batchName"),lecture:v("lecture"),topic:v("topic")};
+    var entry={teacher:teacherName,batch:v("batchName"),lecture:v("lecture"),topic:v("topic")};
     var dt=v("date").split("-");
     var body=new URLSearchParams();
     body.set(FIELD.teacher,v("teacher"));
-    body.set(FIELD.subject,v("subject"));
     body.set(FIELD.topic,v("topic"));
     body.set(FIELD.batch,v("batchName"));
     body.set(FIELD.lecture,v("lecture"));
@@ -285,4 +283,3 @@ var FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfzabq7Ah7sGN_v6ApSO7OK
   load();
   setInterval(load,20000);
   document.addEventListener("visibilitychange",function(){ if(!document.hidden) load(); });
-v
